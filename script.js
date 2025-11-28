@@ -1,23 +1,32 @@
 const url = new URL("https://dragonball-api.com/api/characters");
 
 // Target important elements for display purposes
+const form = document.querySelector(".characterForm"); 
+const input = document.querySelector("#search");
 const imgBox = document.querySelector(".imgBox");
 const characterInfo = document.querySelector(".characterInfo");
 
-// Search for the character Piccolo and return the results
+// Search for the character inputted by the user and return the results
 const searchCharacter = () => {
     url.search = new URLSearchParams({
-        name: "piccolo"
+        name: input.value
     });
     fetch(url)
         .then(res => {
             return res.json();
         })
         .then(data => {
-            // Display the character to the screen
-            displayCharacter(data[0]);
-            console.log(data[0]);
-        })
+            // If the search returns no results, communicate that to the user
+            if(data[0].length === 0) {
+                const noResults = document.createElement("h4");
+                noResults.textContent = "No results found.";
+                characterInfo.appendChild(noResults);
+            }
+            // If not, display the character to the screen
+            else {
+                displayCharacter(data[0]);
+            }            
+        });
 }
 
 // Displays the character to the screen
@@ -58,4 +67,9 @@ const displayCharacter = characterData => {
     characterInfo.appendChild(affiliation);
 }
 
-searchCharacter();
+// Listen for the submit and resolve it
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  searchCharacter();
+});
+
