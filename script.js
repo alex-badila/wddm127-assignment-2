@@ -32,6 +32,16 @@ const displayCharacter = characterData => {
     name.textContent = characterData.name;
     characterInfo.appendChild(name);
 
+    // Display the race
+    const race = document.createElement("p");
+    race.textContent = `Race: ${characterData.race}`;
+    characterInfo.appendChild(race);
+
+    // Display the gender
+    const gender = document.createElement("p");
+    gender.textContent = `Gender: ${characterData.gender}`;
+    characterInfo.appendChild(gender);
+
     // Display the base ki
     const baseKi = document.createElement("p");
     baseKi.textContent = `Base Ki: ${characterData.ki}`;
@@ -42,6 +52,10 @@ const displayCharacter = characterData => {
     maxKi.textContent = `Max Ki: ${characterData.maxKi}`;
     characterInfo.appendChild(maxKi);
 
+    // Display the affiliation
+    const affiliation = document.createElement("p");
+    affiliation.textContent = `Affiliation: ${characterData.affiliation}`;
+    characterInfo.appendChild(affiliation);
 }
 
 searchCharacter();
