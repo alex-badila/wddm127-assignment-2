@@ -11,13 +11,15 @@ const searchCharacter = () => {
     url.search = new URLSearchParams({
         name: input.value
     });
+    // Clear the page of the previous character, if applicable
+    clearPage();
     fetch(url)
         .then(res => {
             return res.json();
         })
         .then(data => {
             // If the search returns no results, communicate that to the user
-            if(data[0].length === 0) {
+            if(data.length === 0) {
                 const noResults = document.createElement("h4");
                 noResults.textContent = "No results found.";
                 characterInfo.appendChild(noResults);
@@ -65,6 +67,13 @@ const displayCharacter = characterData => {
     const affiliation = document.createElement("p");
     affiliation.textContent = `Affiliation: ${characterData.affiliation}`;
     characterInfo.appendChild(affiliation);
+}
+
+// Clear the page between submits
+const clearPage = () => {
+  characterInfo.innerHTML = "";
+  imgBox.innerHTML = "";
+  input.value = "";
 }
 
 // Listen for the submit and resolve it
