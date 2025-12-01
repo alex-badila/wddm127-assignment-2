@@ -1,3 +1,4 @@
+// Get the URL for the fetch request
 const url = new URL("https://dragonball-api.com/api/characters");
 
 // Target important elements for display purposes
